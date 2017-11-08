@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { loadItems } from '../../actions/items.actions';
 
 import ItemList from '../../components/itemlist.components';
-import UnAuthItem from '../UnAuthItemView/';
+// import UnAuthItem from '../UnAuthItemView/';
 
 class App extends Component {
   constructor(){
@@ -23,10 +23,8 @@ class App extends Component {
     console.log(this.props.loadItems, "props.loadItems");
     console.log(this.props.items, "props.items");
     return (
-        
+
       <div className="App">
-        <UnAuthItem /> 
-        <ItemList items={this.props.items}/>
         Hello World!
       </div>
     );
