@@ -32,6 +32,7 @@ export const loginUser = (userCreds) => {
   return (dispatch) => {
     return Axios.post(login, userCreds)
     .then((response) => {
+      console.log(response, "RESPONSE DATA");
       if (response.data.success) {
         dispatch({
           type: LOGIN_USER,

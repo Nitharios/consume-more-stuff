@@ -14,6 +14,10 @@ const userList = (state = initialState, action) => {
     case LOGIN_USER:
       return state.map(user => {
         if (user.id === action.userDetails.id) {
+        // do local storage in here
+        localStorage.setItem('loggedin', true);
+        localStorage.setItem('userId', user.id);
+        localStorage.setItem('username', user.username);
           return Object.assign({}, user, {
             isLoggedIn : true
           });

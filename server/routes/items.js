@@ -8,6 +8,8 @@ const Condition = db.Condition;
 const ItemStatus = db.ItemStatus;
 const router = express.Router();
 
+<<<<<<< HEAD
+=======
 // npm package to handel reading image files  middleware
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -24,6 +26,7 @@ router.route('/')
   let file = req.file;
   console.log(file);
 });
+>>>>>>> development
 
 router.route('/')
 .get((req, res) => {
@@ -34,8 +37,8 @@ router.route('/')
     { model : ItemStatus, as : 'Status'},
     { model : User,
       as : 'User',
-      attributes : { 
-          exclude : ['password'] 
+      attributes : {
+          exclude : ['password']
       }
     }
   ]
@@ -49,7 +52,7 @@ router.route('/')
     return res.json(err);
  });
 })
-.post((req, res) => {
+.post(isAuthenticated, (req, res) => {
   const details = req.body;
   let file = req.file;
 
@@ -73,8 +76,8 @@ router.route('/')
         { model : ItemStatus, as : 'Status'},
         { model : User,
           as : 'User',
-          attributes : { 
-              exclude : ['password'] 
+          attributes : {
+              exclude : ['password']
           }
         }
       ]
@@ -98,8 +101,8 @@ router.route('/:id')
       { model : ItemStatus, as : 'Status'},
       { model : User,
         as : 'User',
-        attributes : { 
-            exclude : ['password'] 
+        attributes : {
+            exclude : ['password']
         }
       }
     ]
@@ -112,5 +115,13 @@ router.route('/:id')
     return res.json (err);
   }));
 });
+
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { next(); }
+  else { res.json({ error : 'Bad Request' }); }
+};
+
+
 
 module.exports = router;

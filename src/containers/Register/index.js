@@ -10,7 +10,8 @@ class Register extends Component {
 
     this.state = {
       username : '',
-      password : ''
+      password : '',
+      redirect : false
     };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -39,7 +40,8 @@ class Register extends Component {
     this.setState(
     {
       username : '',
-      password : ''
+      password : '',
+      redirect : true
     });
   }
 
@@ -62,6 +64,9 @@ class Register extends Component {
   }
 
   render() {
+    if(this.state.redirect) {
+      return <Redirect to="/login"/>
+    }
     return(
       <div>
         <form onSubmit={this.handleSubmit.bind(this)}>

@@ -1,5 +1,4 @@
 /* jshint esversion:6 */
-/*AUTHENTICATION*/
 module.exports = function isAuthenticated(req, res, next) {
   // will pass on to the next middleware if successfully authenticated
   if (req.isAuthenticated()) { next(); }

@@ -31,7 +31,6 @@ class App extends Component {
     return (
       <div id="app">
 
-        <Nav />
         <NewItem />
         <ImageUpload />
         <ItemList items={this.props.items} />
@@ -45,7 +44,7 @@ const mapStateToProps = (state) => {
   return {
     items : state.itemList, // makes it this.props.items
     categories : state.categoryList,
-    conditions : state.conditionlist,
+    conditions : state.conditionList,
     statuses : state.statusList,
     users : state.userList
   }

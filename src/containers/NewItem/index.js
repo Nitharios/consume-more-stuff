@@ -62,6 +62,7 @@ class NewItem extends Component {
   }
 
   render() {
+    if(localStorage.username !== undefined){
     return (
       <div id="new-item-form">
         <form onSubmit={this.handleSubmit}>
@@ -109,6 +110,10 @@ class NewItem extends Component {
       </div>
     );
   }
+  else {
+    return null;
+  }
+}
 }
 
 

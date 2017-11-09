@@ -8,6 +8,7 @@ import Item from '../../components/item.components';
 class SingleItemView extends Component {
 
   componentDidMount(){
+    // if do show/hide in here for authentication can also include redirect link to login
     let id = this.props.match.params.id;
     this.props.loadSingleItem(parseInt(id, 10));
 }
