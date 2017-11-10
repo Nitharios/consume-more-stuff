@@ -21,16 +21,12 @@ const router = express.Router();
 router.route('/')
 .get((req, res) => {
  return Item.findAll({
+  where : { deletedAt : null },
   include : [
     { model : Category, as : 'Category' },
     { model : Condition, as : 'Condition' },
     { model : ItemStatus, as : 'Status'},
-    { model : User,
-      as : 'User',
-      attributes : {
-          exclude : ['password']
-      }
-    }
+    { model : User, as : 'User', attributes : { exclude : ['password'] } }
   ]
  })
  .then((items) => {
@@ -45,13 +41,12 @@ router.route('/')
 .post(isAuthenticated, upload.single('userPhoto'), (req, res) => {
   const details = req.body;
   let file = req.file;
-  
+
   return Item.create({
     userPhoto: details.userPhoto,
     name : details.name,
     description : details.description,
     manufacturer : details.manufacturer,
-    modelname : details.modelname,
     price : details.price,
     category_id : details.category_id,
     condition_id : details.condition_id,
@@ -64,12 +59,7 @@ router.route('/')
         { model : Category, as : 'Category' },
         { model : Condition, as : 'Condition' },
         { model : ItemStatus, as : 'Status'},
-        { model : User,
-          as : 'User',
-          attributes : {
-              exclude : ['password']
-          }
-        }
+        { model : User, as : 'User', attributes : { exclude : ['password'] } }
       ]
     });
   })
@@ -85,16 +75,12 @@ router.route('/')
 router.route('/:id')
 .get((req, res) => {
   return Item.findById(req.params.id, {
+    where : { deletedAt : null },
     include : [
       { model : Category, as : 'Category' },
       { model : Condition, as : 'Condition' },
       { model : ItemStatus, as : 'Status'},
-      { model : User,
-        as : 'User',
-        attributes : {
-            exclude : ['password']
-        }
-      }
+      { model : User, as : 'User', attributes : { exclude : ['password'] } },
     ]
   })
   .then((itemDetails) => {
@@ -107,14 +93,13 @@ router.route('/:id')
 })
 .put((req, res) => {
   let change = req.body;
-  
+
   return Item
   .update({
     name: change.name,
     description: change.description,
     price: change.price,
     manufacturer: change.manufacturer,
-    modelname: change.modelname,
     category_id: change.category_id,
     condition_id: change.condition_id,
     is_sold: change.is_sold,
@@ -124,24 +109,16 @@ router.route('/:id')
     where: { id: change.id },
     returning: true
   })
-  .then(updatedItem => {    
+  .then(updatedItem => {
     updatedItem[1][0].reload({
       include: [
         { model : Category, as : 'Category' },
         { model : Condition, as : 'Condition' },
         { model : ItemStatus, as : 'Status'},
-        { model : User,
-          as : 'User',
-          attributes : {
-              exclude : ['password']
-          }
-        }
+        { model : User, as : 'User', attributes : { exclude : ['password'] } }
       ]
     })
     .then(updatedItemDetails => {
-      console.log(updatedItemDetails);
-      
-      console.log('edited an item');
       res.json(updatedItemDetails);
     });
   })
@@ -152,12 +129,13 @@ router.route('/:id')
 })
 .delete((req, res) => {
   let id = req.params.id;
-  
-  return Item.destroy({
-    where : { id : id }
+  return Item.findById(id)
+  .then(foundItem => {
+    return foundItem.update({
+      deletedAt: new Date()
+    });
   })
   .then(response => {
-    console.log('deleted item');
     res.json({
       success: true
     });

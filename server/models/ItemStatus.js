@@ -4,11 +4,11 @@ module.exports = function(sequelize, DataType) {
       type : DataType.STRING,
       allowNull : false
     }
-  }, 
+  },
   {
     tableName : 'status'
   });
-  
+
   ItemStatus.associate = function(models) {
     ItemStatus.hasOne(models.Item, {
       foreignKey : 'is_sold'

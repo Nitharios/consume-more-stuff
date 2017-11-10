@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataType) {
     password : {
       type : DataType.STRING
     }
-  }, 
+  },
   {
     tableName : 'users'
   });

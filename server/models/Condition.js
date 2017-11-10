@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataType) {
       type : DataType.STRING,
       allowNull : false
     }
-  }, 
+  },
   {
     tableName : 'conditions'
   });
@@ -12,8 +12,8 @@ module.exports = function(sequelize, DataType) {
   Condition.associate = function(models) {
     Condition.hasMany(models.Item, {
       foreignKey : 'condition_id'
-     });
-    };
+    });
+  };
 
   return Condition;
 };

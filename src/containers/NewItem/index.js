@@ -11,8 +11,6 @@ class NewItem extends Component {
       userPhoto: '',
       name: '',
       description: '',
-      manufacturer: '',
-      modelname: '',
       price: 0,
       category_id: 1,
       condition_id: 1
@@ -32,7 +30,6 @@ class NewItem extends Component {
     formData.append('name', this.state.name);
     formData.append('description', this.state.description);
     formData.append('manufacturer', this.state.manufacturer);
-    formData.append('modelname', this.state.modelname);
     formData.append('price', this.state.price);
     formData.append('category_id', this.state.category_id);
     formData.append('condition_id', this.state.condition_id);
@@ -46,7 +43,6 @@ class NewItem extends Component {
       name: '',
       description: '',
       manufacturer: '',
-      modelname: '',
       price: 0,
       category_id: 1,
       condition_id: 1

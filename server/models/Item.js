@@ -12,15 +12,19 @@ module.exports = function(sequelize, DataType) {
       type : DataType.STRING,
       allowNull : true
     },
-    modelname : {
+    price : {
+      type : DataType.NUMERIC,
+      allowNull : true
+    },
+    url : {
       type : DataType.STRING,
       allowNull : true
     },
-    price : {
-      type : DataType.REAL,
+    deletedAt : {
+      type : DataType.DATE,
       allowNull : true
     },
-  }, 
+  },
   {
     tableName : 'items'
   });
