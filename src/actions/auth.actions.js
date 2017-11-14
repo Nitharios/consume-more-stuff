@@ -41,8 +41,10 @@ export const loginUser = (userCreds) => {
       }
     })
     .catch((err) => {
-      console.log('Login Failed. Please re-enter your username and password.', err);
-      return false;
+      dispatch({
+        type: ERROR,
+        error: 'invalid user name or password'
+      })
     });
   };
 };

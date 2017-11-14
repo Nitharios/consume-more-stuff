@@ -1,10 +1,14 @@
 import { LOAD_USERS } from '../actions/users.actions';
-import { REGISTER_USER, LOGIN_USER, LOGOUT_USER } from '../actions/auth.actions';
+import { REGISTER_USER, LOGIN_USER, LOGOUT_USER, ERROR } from '../actions/auth.actions';
 
 const initialState = [];
 
 const userList = (state = initialState, action) => {
   switch (action.type){
+    case ERROR:
+    console.log(action.error, 'ERROR JAJAJAJJAJAA')
+      return [action.error];
+
     case LOAD_USERS:
       return [...action.users];
 

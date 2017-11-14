@@ -3,18 +3,19 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { loginUser } from '../../actions/auth.actions';
 import { loadUsers } from '../../actions/users.actions';
-//import ErrorBoundary from '../../containers/ErrorBoundary';
+import ErrorBoundary from '../../containers/ErrorBoundary'; //ERROR BOUNDARY !!!!!!!!!!!!!
 import Nav from '../../components/nav.components';
 import Footer from '../../components/footer.components';
-// import {
-//   BrowserRouter as Router,
-//   Link,
-//   Route
-// } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Link,
+  Route
+} from 'react-router-dom';
 
 class Login extends Component {
   constructor(props){
     super(props);
+    console.log(props);
     this.state = {
       username : '',
       password : '',
@@ -30,16 +31,23 @@ class Login extends Component {
 
   handleSubmit(evt) {
     //on success do this:
+
+    // if username and password is null
+      // call error boundary
+
+
+
     evt.preventDefault();
     let loginCreds = {
       username : this.state.username,
       password : this.state.password
     }
+    console.log("loginCreds", loginCreds);
     this.props.loginUser(loginCreds);
     this.setState(
     {
-      username : '',
-      password : '',
+      username : "",
+      password : "",
       redirect : true
     })
 
@@ -60,21 +68,8 @@ class Login extends Component {
   }
 
   render(){
-    if(this.state.redirect) {
-      return <Redirect to="/"/>
-    }
-
-    // if (this.state.username.length === 0 || this.state.password === undefined) {
-    //   return (
-    //     <div className="form-warning">
-    //       <p>Oh junk~ You left out some login Credentials!</p>
-    //         <Link to="/login"><button>Click here to go back</button></Link>
-    //     </div>
-    //   );
-
-    // }
-    // else if (this.state.redirect) {
-    //   return <Redirect to="/" />
+    // if(this.state.redirect) {
+    //   return <Redirect to="/"/>
     // }
 
     return(
@@ -82,6 +77,8 @@ class Login extends Component {
         <Nav />
         <h2>Login</h2>
         <div><center>.: welcome back :.</center></div>
+      {/* Below is for username and password submission  - send to servergit*/}
+        {(this.props.users[0] === 'invalid user name or password') ? <h2>{this.props.users[0]}</h2> : null}
         <br/>
         <div className="login-form">
           <form onSubmit={this.handleSubmit.bind(this)}>
@@ -119,8 +116,10 @@ class Login extends Component {
   }
 }
 
+
 // maps store state to local props
 const mapStateToProps = (state) => {
+  console.log(state, ' STATE HAHAHAHAHAHA')
   return {
     users : state.userList
   };
@@ -143,3 +142,4 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Login);
+
