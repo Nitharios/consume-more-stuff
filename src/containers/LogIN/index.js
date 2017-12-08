@@ -26,12 +26,12 @@ class Login extends Component {
     let userCheck = this.state.username;
     let passCheck = this.state.password;
 
-    if(userCheck === '' || userCheck.length < 20 || passCheck === '' || passCheck.length < 5){
-      let credsError = "You need both username (3-20 characters) and password (min 5 characters) to login";
-      this.setState({
-        error: credsError
-      });
-    } else {
+    // if(userCheck === '' || userCheck.length < 20 || passCheck === '' || passCheck.length < 5){
+    //   let credsError = "You need both username (3-20 characters) and password (min 5 characters) to login";
+    //   this.setState({
+    //     error: credsError
+    //   });
+    // } else {
       let loginCreds = {
         username : this.state.username,
         password : this.state.password
@@ -43,7 +43,7 @@ class Login extends Component {
         username : '',
         password : '',
       });
-    }
+    // }
   }
 
   handleUsernameInput(evt) {
