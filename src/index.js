@@ -33,7 +33,6 @@ const store = createStore(
 );
 // ------STORE--------
 
-
 ReactDOM.render(
   <Provider store={store}>
     <IntlProvider locale="en">
